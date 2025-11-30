@@ -7,7 +7,7 @@ spec:
   type: ClusterIP
   selector:
     app: demo   # هر دو نسخه را شامل می‌شود
-    version: blue
+    version: green
   ports:
     - port: 80
       targetPort: 80
