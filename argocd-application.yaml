@@ -12,7 +12,7 @@ spec:
   
   # Source repository configuration
   source:
-    repoURL: https://github.com/bridgedmantis/argcd.git  # لطفا آدرس repository خود را وارد کنید
+    repoURL: https://github.com/bridgedmantis/argocd3.git  # لطفا آدرس repository خود را وارد کنید
     targetRevision: main  # branch اصلی شما
     path: .  # مسیر فایل‌های Kubernetes در repository
     
