@@ -1,0 +1,18 @@
+sudo kubectl apply -f deployment-blue.yaml
+sudo kubectl apply -f deployment-green.yaml
+sudo kubectl apply -f service.yaml
+
+sudo kubectl get pods -l app=demo
+
+sudo kubectl delete deployment app-blue app-green
+
+sudo kubectl get configmap
+
+kubectl apply -f green-configmap.yaml
+sudo kubectl apply -f blue-configmap.yaml
+
+sudo kubectl port-forward svc/demo-service 8080:80
+sudo pkill -f "kubectl port-forward"
+
+sudo ctr -n k8s.io images pull docker.io/library/httpd:latest
+sudo ctr -n k8s.io images pull docker.io/library/nginx:1.23

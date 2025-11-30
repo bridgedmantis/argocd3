@@ -1,0 +1,23 @@
+sudo kubectl apply -f argocd-application.yaml -n argocd
+
+sudo kubectl get svc -n production
+
+sudo kubectl port-forward svc/demo-service 8080:80
+
+sudo kubectl get pods -n production
+
+git add .
+git commit -m "third commit"
+git push -u origin main
+
+
+sudo kubectl get svc -n argocd
+sudo kubectl port-forward -n argocd svc/argocd-server 8090:443
+
+#password
+sudo kubectl get secret -A
+sudo kubectl get secret argocd-initial-admin-secret -n argocd -o yaml
+echo aVVkdGVVelVHYkVDZ0cwbg== | base64 --decode
+
+sudo kubectl delete deploy app-blue -n production
+sudo kubectl delete deploy app-green -n production

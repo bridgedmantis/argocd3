@@ -1,0 +1,38 @@
+#argocd-aplication.yaml
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: kuber10-app
+  namespace: argocd
+  # Annotations for Argo CD UI
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
+spec:
+  project: default
+  
+  # Source repository configuration
+  source:
+    repoURL: https://github.com/bridgedmantis/argcd.git  # لطفا آدرس repository خود را وارد کنید
+    targetRevision: main  # branch اصلی شما
+    path: .  # مسیر فایل‌های Kubernetes در repository
+    
+  # Destination cluster
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: production  # یا namespace مورد نظر شما
+    
+  # Sync policy
+  syncPolicy:
+    automated:
+      prune: true  # حذف منابع حذف شده از Git
+      selfHeal: true  # همگام‌سازی خودکار در صورت تغییر دستی
+      allowEmpty: false
+    syncOptions:
+      - CreateNamespace=true  # ایجاد namespace در صورت عدم وجود
+    retry:
+      limit: 5
+      backoff:
+        duration: 5s
+        factor: 2
+        maxDuration: 3m
+
