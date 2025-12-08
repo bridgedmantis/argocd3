@@ -9,7 +9,7 @@ spec:
   project: default
   
   source:
-    repoURL: https://github.com/bridgedmantis/argcd3.git  
+    repoURL: https://github.com/bridgedmantis/argocd3.git  
     targetRevision: main  
     path: .  
     
