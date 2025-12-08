@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-blue
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: demo
+      version: blue
+  template:
+    metadata:
+      labels:
+        app: demo
+        version: blue
+    spec:
+      containers:
+        - name: app
+          image: httpd:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - name: html
+              mountPath: /usr/local/apache2/htdocs/
+          env:
+            - name: HTTP_PROXY
+              value: ""
+            - name: HTTPS_PROXY
+              value: ""
+            - name: http_proxy
+              value: ""
+            - name: https_proxy
+              value: ""
+            - name: NO_PROXY
+              value: ""
+            - name: no_proxy
+              value: ""
+      volumes:
+        - name: html
+          configMap:
+            name: blue-html

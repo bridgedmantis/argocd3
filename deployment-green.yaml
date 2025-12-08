@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-green
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: demo
+      version: green
+  template:
+    metadata:
+      labels:
+        app: demo
+        version: green
+    spec:
+      containers:
+        - name: app
+          image: nginx:1.23
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - name: html
+              mountPath: /usr/share/nginx/html
+          env:
+            - name: HTTP_PROXY
+              value: ""
+            - name: HTTPS_PROXY
+              value: ""
+            - name: http_proxy
+              value: ""
+            - name: https_proxy
+              value: ""
+            - name: NO_PROXY
+              value: ""
+            - name: no_proxy
+              value: ""
+      volumes:
+        - name: html
+          configMap:
+            name: green-html

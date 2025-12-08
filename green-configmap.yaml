@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: green-html
+data:
+  index.html: |
+    <html>
+      <body>
+        <h1>This is Green</h1>
+      </body>
+    </html>
